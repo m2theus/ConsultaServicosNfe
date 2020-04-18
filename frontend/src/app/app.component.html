@@ -1,0 +1,65 @@
+<p-panel header="Disponibilidade de serviços nfe">
+  <p-table #dt [loading]="loading" [responsive]="true" [columns]="cols" [value]="nfes">
+    <ng-template pTemplate="caption" class="container-caption">
+      <p-card class="container-filtros">
+        <div class="ui-g">
+          <div class="ui-g-6">
+            <div class="ui-g">
+              <p class="label-filtro">Tipo de filtro:</p>
+              <p-autoComplete [(ngModel)]="filtro" (onSelect)="validTipoFiltro($event)" [suggestions]="filteredBrands"
+                (completeMethod)="filterWithContains($event)" [size]="30" [minLength]="1" placeholder="Tipo de filtro"
+                [dropdown]="true" field="label" [style]="{'width':'250px', 'display':'flex'}">
+                <ng-template let-brand pTemplate="item">
+                  <div style="border-bottom:1px solid #D5D5D5">
+                    <div>{{brand.label}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+          </div>
+          <div *ngIf="showEstado" class="ui-g-6">
+            <div class="ui-g">
+              <p class="label-filtro">Estado:</p>
+              <p-autoComplete [(ngModel)]="estado" (onSelect)="getByEstado($event)" [suggestions]="estadosFiltrados"
+                (completeMethod)="filterWithContainsEstado($event)" [size]="30" [minLength]="1" placeholder="Estado"
+                [dropdown]="true" field="nome" [style]="{'display':'flex', 'padding-left':'35px'}">
+                <ng-template let-estado pTemplate="item">
+                  <div style="border-bottom:1px solid #D5D5D5">
+                    <div>{{estado.nome}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+
+          </div>
+          <div *ngIf="showData" class="ui-g-6">
+            <div class="ui-g">
+              <p class="label-filtro">Data:</p>
+              <p-calendar (onSelect)="getByData($event)" placeholder="Data" [style]="{ 'padding-left':'35px'}"
+                [(ngModel)]="data" [defaultDate]="defaultDate" name="startAnalyze"></p-calendar>
+            </div>
+
+          </div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g item-radiogroup">
+          <p-radioButton name="groupname" value="nfe" [(ngModel)]="selectedValueNfe"></p-radioButton>
+            <h4  class="label-radiogroup">Somente nfe</h4>
+          </div>
+          <div class="ui-g item-radiogroup">
+          <p-radioButton name="groupname" value="contingencia" [(ngModel)]="selectedValueNfe"></p-radioButton>
+            <h4 class="label-radiogroup">Somente nfe em contigência</h4>
+          </div>
+          <div class="ui-g item-radiogroup">
+            <p-radioButton name="groupname" value="todos" [(ngModel)]="selectedValueNfe"></p-radioButton>
+            <h4 class="label-radiogroup">Todos</h4>
+          </div>
+        </div>
+      </p-card>
+
+    </ng-template>
+  </p-table>
+  <app-nfe *ngIf="showNfe && selectedValueNfe == 'todos' || selectedValueNfe=='nfe'" [dataChart]="dataChart" [colunas]="cols" [valores]="nfes" [titulo]="'Nfe'"></app-nfe>
+  <app-nfe *ngIf="showNfeContingencia && selectedValueNfe == 'todos' || selectedValueNfe=='contingencia'" [dataChart]="dataChart" [colunas]="cols" [valores]="nfesContingencia" [titulo]="'Nfe em contigência'"></app-nfe>
+</p-panel>

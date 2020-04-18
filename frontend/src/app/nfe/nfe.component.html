@@ -1,0 +1,51 @@
+<p-card [header]="titulo">
+    <p-table [responsive]="true" [columns]="colunas" [value]="valores">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of colunas">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{user.dsEstado}}</td>
+                <td>{{user.dsAutorizador}}</td>
+                <td><i class="pi pi-circle-on" [class.icon-status-instavel]="user.dsStatusRecepcaoEvento == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusRecepcaoEvento == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusRecepcaoEvento == 'INDISPONIVEL'"></i></td>
+                <td><i class="pi pi-circle-on" [class.icon-status-semstatus]="user.dsStatusConsultaCadastro == 'SEM_STATUS'"
+                        [class.icon-status-instavel]="user.dsStatusConsultaCadastro == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusConsultaCadastro == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusConsultaCadastro == 'INDISPONIVEL'"></i></td>
+                <td>{{user.dsTempoMedio}}</td>
+                <td><i class="pi pi-circle-on " [class.icon-status-instavel]="user.dsStatusServico == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusServico == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusServico == 'INDISPONIVEL'"></i></td>
+                <td><i class="pi pi-circle-on" [class.icon-status-instavel]="user.dsStatusConsultaProtocolo == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusConsultaProtocolo == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusConsultaProtocolo == 'INDISPONIVEL'"></i></td>
+                <td><i class="pi pi-circle-on" [class.icon-status-instavel]="user.dsStatusAutorizacao == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusAutorizacao == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusAutorizacao== 'INDISPONIVEL'"></i></td>
+                <td><i class="pi pi-circle-on" [class.icon-status-instavel]="user.dsStatusRetornoAutorizacao == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusRetornoAutorizacao == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusRetornoAutorizacao == 'INDISPONIVEL'"></i></td>
+                <td><i class="pi pi-circle-on" [class.icon-status-semstatus]="user.dsStatusInutilizacao == 'SEM_STATUS'"
+                        [class.icon-status-instavel]="user.dsStatusInutilizacao == 'INSTAVEL'"
+                        [class.icon-status-disponivel]="user.dsStatusInutilizacao == 'DISPONIVEL'"
+                        [class.icon-status-indisponivel]="user.dsStatusInutilizacao== 'INDISPONIVEL'"></i></td>
+                <td>{{user.createdAtTime | date:'dd/MM/yyyy HH:mm'}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-colunas>
+            <tr>
+                <td [attr.colspan]="colunas.length">
+                    Nenhum serviço encontrado
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <h4>Estados com maiores indisponibilidades de serviços</h4>
+    <p-chart type="bar" [data]="dataChart"></p-chart>
+</p-card>
