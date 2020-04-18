@@ -26,14 +26,14 @@ export class AppComponent implements OnInit {
   data;
   defaultDate = new Date();
   selectedValueNfe = 'todos';
-  dataChart: any;
+  dataChartNfe: any;
+  dataChartNfeContigencia: any;
 
   tipoFiltros: any[] = [
     { label: 'Data', value: 'Data' },
     { label: 'Estado', value: 'Estado' },
     { label: 'Nenhum', value: 'Nenhum' },
   ];
-
 
   tiposEstados: any[] = [
     { nome: "Todos", sigla: "Todos" },
@@ -68,17 +68,7 @@ export class AppComponent implements OnInit {
   ]
 
   constructor(private disponibilidadeService: DisponibilidadeService, private datePipe: DatePipe) {
-    this.dataChart = {
-      labels: ['PR', 'RS', 'SC'],
-      datasets: [
-        {
-          label: 'Indisponibilidades',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: [2, 2, 3, 0]
-        },
-      ]
-    }
+
   }
 
   ngOnInit() {
@@ -97,6 +87,46 @@ export class AppComponent implements OnInit {
     ];
     this.getAllNfe();
     this.getAllNfeContingencia();
+    this.getTotalIndisponibilidadesNfe();
+    this.getTotalIndisponibilidadesNfeContingencia();
+  }
+
+  getTotalIndisponibilidadesNfe() {
+    this.disponibilidadeService.getTotalIndisponibilidadesNfe().then(data => {
+      data = data.sort(function (a, b) {
+        return b.total - a.total;
+      });
+      this.dataChartNfe = {
+        labels: [data[0].dsEstado, data[1].dsEstado, data[2].dsEstado],
+        datasets: [
+          {
+            label: 'Indisponibilidades',
+            backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            data: [data[0].total, data[1].total, data[2].total, 0]
+          },
+        ]
+      }
+    });
+  }
+
+  getTotalIndisponibilidadesNfeContingencia() {
+    this.disponibilidadeService.getTotalIndisponibilidadesNfeContingencia().then(data => {
+      data = data.sort(function (a, b) {
+        return b.total - a.total;
+      });
+      this.dataChartNfeContigencia = {
+        labels: [data[0].dsEstado, data[1].dsEstado, data[2].dsEstado],
+        datasets: [
+          {
+            label: 'Indisponibilidades',
+            backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            data: [data[0].total, data[1].total, data[2].total, 0]
+          },
+        ]
+      }
+    });
   }
 
   getAllNfe() {
@@ -150,18 +180,19 @@ export class AppComponent implements OnInit {
       this.data = null;
       this.estado = null;
     } else if (value && value.label == 'Nenhum') {
-      this.showEstado = false;
-      this.showData = false;
-      this.data = null;
-      this.estado = null;
+      this.disableFilters();
       this.getAllNfe();
       this.getAllNfeContingencia();
     } else {
-      this.data = null;
-      this.estado = null;
-      this.showData = false;
-      this.showEstado = false;
+      this.disableFilters();
     }
+  }
+
+  disableFilters() {
+    this.data = null;
+    this.estado = null;
+    this.showData = false;
+    this.showEstado = false;
   }
 
   getByEstado(value) {
@@ -181,9 +212,7 @@ export class AppComponent implements OnInit {
           this.loading = false;
         });
       }
-
     }
-
   }
 
   getByData(value) {

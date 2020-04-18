@@ -1,6 +1,7 @@
 package com.consultaservico.nfe.controller;
 
 import com.consultaservico.nfe.model.DisponibilidadeNfe;
+import com.consultaservico.nfe.model.TotalIndisponibilidadeNfe;
 import com.consultaservico.nfe.repository.ConsultaServicoNfeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -52,6 +53,11 @@ public class ConsultaServicoNfeController {
         calendar.setTime(date);
         calendar.add(Calendar.HOUR_OF_DAY, hours);
         return calendar.getTime();
+    }
+
+    @GetMapping("/getTotalIndisponibilidade")
+    public List<TotalIndisponibilidadeNfe> getTotalIndisponibilidade() {
+        return consultaServicoNfeRepository.getTotalIndisponibilidade();
     }
 
 }

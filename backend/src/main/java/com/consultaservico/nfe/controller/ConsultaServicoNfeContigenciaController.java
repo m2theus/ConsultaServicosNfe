@@ -1,6 +1,7 @@
 package com.consultaservico.nfe.controller;
 
 import com.consultaservico.nfe.model.DisponibilidadeNfeContigencia;
+import com.consultaservico.nfe.model.TotalIndisponibilidadeNfe;
 import com.consultaservico.nfe.repository.ConsultaServicoNfeContigenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -8,10 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/consultanfe/contigencia")
@@ -48,6 +46,11 @@ public class ConsultaServicoNfeContigenciaController {
         calendar.setTime(date);
         calendar.add(Calendar.HOUR_OF_DAY, hours);
         return calendar.getTime();
+    }
+
+    @GetMapping("/getTotalIndisponibilidade")
+    public List<TotalIndisponibilidadeNfe> getTotalIndisponibilidade() {
+        return consultaServicoNfeContigenciaRepository.getTotalIndisponibilidade();
     }
 
 }

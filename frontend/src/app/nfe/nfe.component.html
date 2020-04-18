@@ -35,9 +35,9 @@
                         [class.icon-status-instavel]="user.dsStatusInutilizacao == 'INSTAVEL'"
                         [class.icon-status-disponivel]="user.dsStatusInutilizacao == 'DISPONIVEL'"
                         [class.icon-status-indisponivel]="user.dsStatusInutilizacao== 'INDISPONIVEL'"></i></td>
-                <td>{{user.createdAtTime | date:'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{user.createdAtTime | date : 'dd/MM/yyyy HH:mm'}}</td>
             </tr>
-        </ng-template>
+        </ng-template>  
         <ng-template pTemplate="emptymessage" let-colunas>
             <tr>
                 <td [attr.colspan]="colunas.length">

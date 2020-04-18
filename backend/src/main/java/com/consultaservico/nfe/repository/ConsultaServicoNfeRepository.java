@@ -1,6 +1,7 @@
 package com.consultaservico.nfe.repository;
 
 import com.consultaservico.nfe.model.DisponibilidadeNfe;
+import com.consultaservico.nfe.model.TotalIndisponibilidadeNfe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,23 +27,14 @@ public interface ConsultaServicoNfeRepository extends JpaRepository<Disponibilid
     @Query("select u from DisponibilidadeNfe as u where  :dtInicial <= u.createdAt and :dtFinal >= u.createdAt group by u.dsEstado")
     List<DisponibilidadeNfe> getByData(@Param("dtInicial") Date dtInicial, @Param("dtFinal") Date dtFinal);
 
+    @Query("SELECT nfe.dsEstado as dsEstado ,COUNT(CASE WHEN nfe.dsStatusAutorizacao in(1,2) or nfe.dsStatusRetornoAutorizacao in(1,2) or nfe.dsStatusInutilizacao in(1,2) or nfe.dsStatusConsultaProtocolo in(1,2) or nfe.dsStatusServico in(1,2) or nfe.dsStatusConsultaCadastro in (1,2) or nfe.dsStatusRecepcaoEvento in (1,2)  THEN nfe.id END) as total FROM DisponibilidadeNfe nfe GROUP BY nfe.dsEstado")
+    List<TotalIndisponibilidadeNfe> getTotalIndisponibilidade();
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("update DisponibilidadeNfe as nfe set nfe.fgAtivo = false")
     void inactiveServicos();
 
-//    SELECT
-//            ds_estado,
-//    COUNT(CASE WHEN ds_status_autorizacao in(1,2) or
-//    ds_status_retorno_autorizacao in(1,2) or
-//    ds_status_inutilizacao in(1,2) or
-//    ds_status_consulta_protocolo in(1,2) or
-//    ds_status_servico in(1,2) or
-//    ds_status_consulta_cadastro in (1,2) or ds_status_recepcao_evento in (1,2)  THEN id END) as total
-//    FROM
-//            nfe
-//    GROUP BY
-//    ds_estado
-//    ;
+
 
 }

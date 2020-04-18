@@ -1,3 +1,5 @@
+
+
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -33,7 +35,7 @@ import { ChartModule } from 'primeng/chart';
     CardModule,
     FormsModule,
     RadioButtonModule,
-    ChartModule
+    ChartModule,
   ],
   providers: [DisponibilidadeService, DatePipe],
   bootstrap: [AppComponent]

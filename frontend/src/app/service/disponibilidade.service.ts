@@ -6,12 +6,29 @@ export class DisponibilidadeService {
 
     constructor(private http: HttpClient) { }
 
+    getTotalIndisponibilidadesNfe() {
+        return this.http.get('http://localhost:8080/consultanfe/getTotalIndisponibilidade')
+            .toPromise()
+            .then(res => <any[]>res)
+            .then(data => {
+                return data;
+            });
+    }
+
+    getTotalIndisponibilidadesNfeContingencia() {
+        return this.http.get('http://localhost:8080/consultanfe/contigencia/getTotalIndisponibilidade')
+            .toPromise()
+            .then(res => <any[]>res)
+            .then(data => {
+                return data;
+            });
+    }
+
     getStatusAllEstados() {
         return this.http.get('http://localhost:8080/consultanfe/all')
             .toPromise()
             .then(res => <any[]>res)
             .then(data => { 
-                console.log(data);
                 return data; });
     }
 
@@ -20,7 +37,6 @@ export class DisponibilidadeService {
             .toPromise()
             .then(res => <any[]>res)
             .then(data => {
-                console.log(data);
                 return data;
             });
     }
@@ -31,7 +47,6 @@ export class DisponibilidadeService {
             .toPromise()
             .then(res => <any>res)
             .then(data => {
-                console.log(data);
                 return [data];
             });
     }
@@ -41,7 +56,6 @@ export class DisponibilidadeService {
             .toPromise()
             .then(res => <any>res)
             .then(data => {
-                console.log(data);
                 return [data];
             });
     }
@@ -53,7 +67,6 @@ export class DisponibilidadeService {
             .toPromise()
             .then(res => <any>res)
             .then(data => {
-                console.log(data);
                 return data;
             });
     }
@@ -65,7 +78,6 @@ export class DisponibilidadeService {
             .toPromise()
             .then(res => <any>res)
             .then(data => {
-                console.log(data);
                 return data;
             });
     }

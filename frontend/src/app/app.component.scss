@@ -14,10 +14,23 @@
     justify-content: center;
 }
 
+.container-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
 .item-radiogroup {
+    flex:1;
     align-items: center;
     justify-content: center;
     padding: 15px;
+}
+
+.filtro-data {
+    align-items: center;
+    justify-content: center;
 }
 
 .label-radiogroup {
@@ -50,10 +63,18 @@
    width: 100%;
 }
 
+.container-tipos-filtros {
+   display: flex;
+   justify-content: space-around;
+   flex-direction: row;
+}
+
 .label-filtro {
     padding-right: 10px;
     display: flex;
     align-items: center;
+    flex:1;
+    padding-left: 20px;
 }
 
 body .ui-table .ui-table-caption {
