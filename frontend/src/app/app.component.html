@@ -43,11 +43,11 @@
         </div>
         <div class="ui-g container-filtros">
           <div class="ui-g item-radiogroup">
-          <p-radioButton name="groupname" value="nfe" [(ngModel)]="selectedValueNfe"></p-radioButton>
-            <h4  class="label-radiogroup">Somente nfe</h4>
+            <p-radioButton name="groupname" value="nfe" [(ngModel)]="selectedValueNfe"></p-radioButton>
+            <h4 class="label-radiogroup">Somente nfe</h4>
           </div>
           <div class="ui-g item-radiogroup">
-          <p-radioButton name="groupname" value="contingencia" [(ngModel)]="selectedValueNfe"></p-radioButton>
+            <p-radioButton name="groupname" value="contingencia" [(ngModel)]="selectedValueNfe"></p-radioButton>
             <h4 class="label-radiogroup">Somente nfe em contigência</h4>
           </div>
           <div class="ui-g item-radiogroup">
@@ -59,6 +59,8 @@
 
     </ng-template>
   </p-table>
-  <app-nfe *ngIf="showNfe && selectedValueNfe == 'todos' || selectedValueNfe=='nfe'" [dataChart]="dataChartNfe" [colunas]="cols" [valores]="nfes" [titulo]="'Nfe'"></app-nfe>
-  <app-nfe *ngIf="showNfeContingencia && selectedValueNfe == 'todos' || selectedValueNfe=='contingencia'" [dataChart]="dataChartNfeContigencia" [colunas]="cols" [valores]="nfesContingencia" [titulo]="'Nfe em contigência'"></app-nfe>
+  <app-nfe *ngIf="showNfe && selectedValueNfe == 'todos' || selectedValueNfe=='nfe'" [dataChart]="dataChartNfe"
+    [colunas]="cols" [valores]="nfes" [titulo]="'Nfe'"></app-nfe>
+  <app-nfe *ngIf="showNfeContingencia && selectedValueNfe == 'todos' || selectedValueNfe=='contingencia'" [dataChart]="dataChartNfeContigencia"
+    [colunas]="cols" [valores]="nfesContingencia" [titulo]="'Nfe em contigência'"></app-nfe>
 </p-panel>

@@ -10,15 +10,20 @@ import { DatePipe } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
+  /* Variáveis utilizadas para recuperar dados*/
   nfes: NfeDisponibilidade[];
   nfesContingencia: NfeDisponibilidade[];
   title = 'disponibilidade-servicos-nfe';
   cols: any[];
+
+  /* Variáveis utilizadas para controle de estado das telas*/
   loading: boolean;
   showEstado: boolean;
   showData: boolean;
   showNfe: boolean = false;
   showNfeContingencia: boolean = false;
+
+  /* Variáveis utilizadas para controle dos filtros*/
   filteredBrands: any[];
   estadosFiltrados: any[];
   filtro;
@@ -29,6 +34,7 @@ export class AppComponent implements OnInit {
   dataChartNfe: any;
   dataChartNfeContigencia: any;
 
+  /* Variáveis utilizadas para guardar os tipos de filtros da tela*/
   tipoFiltros: any[] = [
     { label: 'Data', value: 'Data' },
     { label: 'Estado', value: 'Estado' },
@@ -91,6 +97,7 @@ export class AppComponent implements OnInit {
     this.getTotalIndisponibilidadesNfeContingencia();
   }
 
+  /* Método responsável por retornar os 3 estados com maiores indisponibilidades de serviços na nfe*/
   getTotalIndisponibilidadesNfe() {
     this.disponibilidadeService.getTotalIndisponibilidadesNfe().then(data => {
       data = data.sort(function (a, b) {
@@ -110,6 +117,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /* Método responsável por retornar os 3 estados com maiores indisponibilidades de serviços na nfe em contigência*/
   getTotalIndisponibilidadesNfeContingencia() {
     this.disponibilidadeService.getTotalIndisponibilidadesNfeContingencia().then(data => {
       data = data.sort(function (a, b) {
@@ -129,6 +137,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /* Método responsável por retornar todos os dados de serviços das nfe*/
   getAllNfe() {
     this.disponibilidadeService.getStatusAllEstados().then(data => {
       this.nfes = data;
@@ -137,6 +146,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /* Método responsável por retornar todos os dados de serviços das nfe em contigência*/
   getAllNfeContingencia() {
     this.disponibilidadeService.getStatusAllEstadosContingencia().then(data => {
       this.nfesContingencia = data;
@@ -145,7 +155,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-
+  /* Filter para dropdown de tipos de filtro*/
   filterWithContains(event) {
     this.filteredBrands = [];
     for (let i = 0; i < this.tipoFiltros.length; i++) {
@@ -157,6 +167,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /* Filter para dropdown de estados*/
   filterWithContainsEstado(event) {
     this.estadosFiltrados = [];
     for (let i = 0; i < this.tiposEstados.length; i++) {
@@ -168,6 +179,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /* Valida o tipo de filtro selecionado*/
   validTipoFiltro(value) {
     if (value && value.label == 'Data') {
       this.showData = true;
@@ -188,6 +200,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /* Desabilita os filtros da tela*/
   disableFilters() {
     this.data = null;
     this.estado = null;
@@ -195,6 +208,7 @@ export class AppComponent implements OnInit {
     this.showEstado = false;
   }
 
+  /* Busca os serviços de acordo o estado*/
   getByEstado(value) {
     if (value) {
       if (value.nome == "Todos") {
@@ -215,6 +229,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+
+  /* Busca os serviços de acordo a data*/
   getByData(value) {
     if (value) {
       this.disponibilidadeService.getStatusByData(this.datePipe.transform(value, 'yyyy/MM/dd')).then(data => {

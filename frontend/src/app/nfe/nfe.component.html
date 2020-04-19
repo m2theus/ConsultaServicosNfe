@@ -37,7 +37,7 @@
                         [class.icon-status-indisponivel]="user.dsStatusInutilizacao== 'INDISPONIVEL'"></i></td>
                 <td>{{user.createdAtTime | date : 'dd/MM/yyyy HH:mm'}}</td>
             </tr>
-        </ng-template>  
+        </ng-template>
         <ng-template pTemplate="emptymessage" let-colunas>
             <tr>
                 <td [attr.colspan]="colunas.length">
@@ -46,6 +46,6 @@
             </tr>
         </ng-template>
     </p-table>
-    <h4>Estados com maiores indisponibilidades de serviços</h4>
+    <h4>Os três estados com maiores indisponibilidades de serviços</h4>
     <p-chart type="bar" [data]="dataChart"></p-chart>
 </p-card>

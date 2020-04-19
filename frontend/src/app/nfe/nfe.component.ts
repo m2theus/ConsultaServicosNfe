@@ -1,6 +1,4 @@
-import { DatePipe } from '@angular/common';
-import { DisponibilidadeService } from './../service/disponibilidade.service';
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-nfe',
@@ -15,13 +13,7 @@ export class NfeComponent {
   @Input() dataChart;
   title = 'disponibilidade-servicos-nfe';
 
-  ngOnInit() {
-    console.log(this.colunas);
-    console.log(this.valores);
-  }
-
 }
-
 
 export interface NfeDisponibilidade {
   id;
@@ -37,4 +29,3 @@ export interface NfeDisponibilidade {
   dsStatusRecepcaoEvento;
   createdAtTime;
 }
-
