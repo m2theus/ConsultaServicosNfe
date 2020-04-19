@@ -5,17 +5,18 @@ import com.consultaservico.nfe.model.TotalIndisponibilidadeNfe;
 import com.consultaservico.nfe.repository.ConsultaServicoNfeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @RestController
 @RequestMapping("/consultanfe")
 public class ConsultaServicoNfeController {
@@ -42,12 +43,15 @@ public class ConsultaServicoNfeController {
 
     @PostMapping("/getByData")
     public List<DisponibilidadeNfe> getByData(@RequestParam Date dtInicial, @RequestParam Date dtFinal) {
-        Date dtinit = addHoursToJavaUtilDate(dtInicial,00);
-        Date dtFim = addHoursToJavaUtilDate(dtFinal,23);
+        Date dtinit = addHoursToJavaUtilDate(dtInicial, 00);
+        Date dtFim = addHoursToJavaUtilDate(dtFinal, 23);
         List<DisponibilidadeNfe> teste = consultaServicoNfeRepository.getByData(dtinit, dtFim);
         return teste;
     }
 
+    /**
+     * Método para ajustar horas de data inicial e final
+     */
     public Date addHoursToJavaUtilDate(Date date, int hours) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

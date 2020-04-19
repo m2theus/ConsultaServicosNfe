@@ -5,7 +5,6 @@ import com.consultaservico.nfe.model.DisponibilidadeNfe;
 import com.consultaservico.nfe.model.DisponibilidadeNfeContigencia;
 import com.consultaservico.nfe.repository.ConsultaServicoNfeContigenciaRepository;
 import com.consultaservico.nfe.repository.ConsultaServicoNfeRepository;
-import org.apache.tomcat.jni.Local;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,13 +17,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @Component
 @EnableScheduling
 @Service
@@ -35,7 +36,10 @@ public class ScheduledTasks {
     @Autowired
     private ConsultaServicoNfeContigenciaRepository consultaServicoNfeContigenciaRepository;
 
-    @Scheduled(fixedRate = 50000)
+    /**
+     * Task criada para buscar dados de disponibilidade de serviços a cada 5 minutos, por meio da biblioteca jsoup
+     */
+    @Scheduled(fixedRate = 300000)
     public void scheduleTaskWithFixedRate() {
         //    @Override
         try {
@@ -87,6 +91,9 @@ public class ScheduledTasks {
         convertStringFromDisponibilidadeNfe(listDados);
     }
 
+    /**
+     * Método responsável por chamar as conversões de acordo com o autorizador de nfe
+     */
     void convertStringFromDisponibilidadeNfe(List<String> listDados) {
 
         if (listDados.size() > 0) {
@@ -124,6 +131,9 @@ public class ScheduledTasks {
         }
     }
 
+    /**
+     * Método responsável por chamar as conversões de acordo com o autorizador de nfe em contigência
+     */
     void convertFromDisponibilidadeNfeAutorizadorContigencia(List<String> listDados, ArrayList<String> listEstadoAutorizador) {
 
         if (listDados.size() > 0) {
@@ -149,6 +159,9 @@ public class ScheduledTasks {
         }
     }
 
+    /**
+     * Método responsável por realizar conversões dos dados recuperados do site da sefaz
+     */
     void convertFromDisponibilidadeNfeAutorizador(List<String> listDados, ArrayList<String> listEstadoAutorizador) {
 
         if (listDados.size() > 0) {

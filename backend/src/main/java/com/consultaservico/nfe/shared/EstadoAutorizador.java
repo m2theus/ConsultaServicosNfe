@@ -3,6 +3,9 @@ package com.consultaservico.nfe.shared;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 public enum EstadoAutorizador {
     SVAN(new ArrayList<String>(Arrays.asList("MA"))),
     SVRS(new ArrayList<String>(Arrays.asList("RN", "PB", "SC", "AC", "AL", "AP", "DF", "ES", "PB", "PI", "RJ", "RO", "RR", "SC", "SE", "TO"))),

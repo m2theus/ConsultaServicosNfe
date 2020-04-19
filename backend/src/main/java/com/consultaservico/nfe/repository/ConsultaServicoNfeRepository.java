@@ -13,7 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @Repository
 @Transactional
 public interface ConsultaServicoNfeRepository extends JpaRepository<DisponibilidadeNfe, Long> {
@@ -34,7 +36,6 @@ public interface ConsultaServicoNfeRepository extends JpaRepository<Disponibilid
     @Modifying(clearAutomatically = true)
     @Query("update DisponibilidadeNfe as nfe set nfe.fgAtivo = false")
     void inactiveServicos();
-
 
 
 }

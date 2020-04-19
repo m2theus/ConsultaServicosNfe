@@ -5,6 +5,9 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @Configuration
 public class SchedulerConfig implements SchedulingConfigurer {
     private final int POOL_SIZE = 10;

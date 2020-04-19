@@ -4,7 +4,6 @@ import com.consultaservico.nfe.shared.StatusDisponibilidade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +13,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @Entity
 @Table(name = "nfe_contigencia", schema = "consulta")
 @EntityListeners(AuditingEntityListener.class)

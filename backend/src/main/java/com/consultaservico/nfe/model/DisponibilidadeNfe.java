@@ -1,10 +1,10 @@
 package com.consultaservico.nfe.model;
 
+import com.consultaservico.nfe.shared.StatusDisponibilidade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import com.consultaservico.nfe.shared.StatusDisponibilidade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,6 +13,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @Entity
 @Table(name = "nfe", schema = "consulta")
 @EntityListeners(AuditingEntityListener.class)

@@ -9,8 +9,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
+/**
+ * Created by Matheus Molinete on 16/04/20.
+ */
 @RestController
 @RequestMapping("/consultanfe/contigencia")
 public class ConsultaServicoNfeContigenciaController {
@@ -41,6 +47,9 @@ public class ConsultaServicoNfeContigenciaController {
         return consultaServicoNfeContigenciaRepository.getByData(dtinit, dtFim);
     }
 
+    /**
+     * Método para ajustar horas de data inicial e final
+     */
     public Date addHoursToJavaUtilDate(Date date, int hours) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
